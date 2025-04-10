@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import datetime
 
 def display_data(name, reason, date_ocurred, location_ocurred):
@@ -23,7 +23,21 @@ def generate_UI():
 
     reason_label = tk.Label(window, text="Reason:")
     reason_label.grid(row=1, column=0)
-    reason_entry = tk.Entry(window)
+    reasons = [
+        "Burglary",
+        "Driving under the influence (DUI)",
+        "Driving while intoxicated (DWI)",
+        "Driving while suspended (DWS)",
+        "Parole",
+        "Probation",
+        "Traffic Violation",
+        "Other"
+    ]
+    reasons_variable = tk.StringVar()
+    reasons_variable.set("Select a reason")
+
+    #reason_entry = tk.Entry(window) #used to be the way to type in an entry, the more control the better
+    reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
     reason_entry.grid(row=1, column=1)
 
     date_occurred_label = tk.Label(window, text="Date Occurred:")
@@ -38,7 +52,7 @@ def generate_UI():
 
     def submit():
         name = name_entry.get().strip()
-        reason = reason_entry.get().strip()
+        reason = reasons_variable.get().strip()
         date = date_occurred_entry.get().strip()
         location = location_entry.get().strip()
 
@@ -54,7 +68,7 @@ def generate_UI():
         display_data(name, reason, date, location)
 
         name_entry.delete(0, tk.END)
-        reason_entry.delete(0, tk.END)
+        reasons_variable.set("Select a variable")
         date_occurred_entry.delete(0, tk.END)
         location_entry.delete(0, tk.END)
 
