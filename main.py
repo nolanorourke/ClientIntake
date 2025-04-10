@@ -40,6 +40,25 @@ def generate_UI():
     reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
     reason_entry.grid(row=1, column=1)
 
+    match reasons_variable:
+        case "Burglary":
+            #ask burglary questions
+        case "Driving under the influence (DUI)":
+            #ask dui questions
+        case "Driving while intoxicated (DWI)":
+            #ask dwi questions
+        case "Driving while suspended (DWS)":
+            # ask dws questions
+        case "Parole":
+            #ask parole questions
+        case "Probation":
+            #ask probation questions
+        case "Traffic Violation":
+            #ask numerous questions 
+        case "Other":
+            #ask questions
+
+
     date_occurred_label = tk.Label(window, text="Date Occurred:")
     date_occurred_label.grid(row=2, column=0)
     date_occurred_entry = tk.Entry(window)
@@ -58,7 +77,7 @@ def generate_UI():
 
         if not name:
             name = "NO NAME"
-        if not reason:
+        if reason == "Select a reason":
             reason = "NO REASON"
         if not date:
             date = "NO DATE"
@@ -68,7 +87,7 @@ def generate_UI():
         display_data(name, reason, date, location)
 
         name_entry.delete(0, tk.END)
-        reasons_variable.set("Select a variable")
+        reasons_variable.set("Select a reason")
         date_occurred_entry.delete(0, tk.END)
         location_entry.delete(0, tk.END)
 
