@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 import datetime
+from tkcalendar import DateEntry
 
 def display_data(name, reason, date_ocurred, location_ocurred):
     print(f"Name: {name}")
@@ -40,28 +41,28 @@ def generate_UI():
     reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
     reason_entry.grid(row=1, column=1)
 
-    match reasons_variable:
-        case "Burglary":
+    # if reasons_variable == "Burglary":
             #ask burglary questions
-        case "Driving under the influence (DUI)":
-            #ask dui questions
-        case "Driving while intoxicated (DWI)":
-            #ask dwi questions
-        case "Driving while suspended (DWS)":
-            # ask dws questions
-        case "Parole":
-            #ask parole questions
-        case "Probation":
-            #ask probation questions
-        case "Traffic Violation":
-            #ask numerous questions 
-        case "Other":
-            #ask questions
+        # case "Driving under the influence (DUI)":
+        #     #ask dui questions
+        # case "Driving while intoxicated (DWI)":
+        #     #ask dwi questions
+        # case "Driving while suspended (DWS)":
+        #     # ask dws questions
+        # case "Parole":
+        #     #ask parole questions
+        # case "Probation":
+        #     #ask probation questions
+        # case "Traffic Violation":
+        #     #ask numerous questions 
+        # case "Other":
+        #     #ask questions
 
 
     date_occurred_label = tk.Label(window, text="Date Occurred:")
     date_occurred_label.grid(row=2, column=0)
-    date_occurred_entry = tk.Entry(window)
+    date_occurred_entry = DateEntry(window, date_pattern='mm-dd-yyyy')
+    #date_occurred_entry = tk.Entry(window) #ability to enter date, this way it is formatted the same eveyr time
     date_occurred_entry.grid(row=2, column=1)
 
     location_label = tk.Label(window, text="Location:")
