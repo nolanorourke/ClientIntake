@@ -3,6 +3,7 @@ import os
 from tkinter import messagebox, ttk
 import datetime
 from tkcalendar import DateEntry
+from docx import Document 
 
 def display_data(name, reason, date_ocurred, location_ocurred):
     print(f"Name: {name}")
@@ -15,10 +16,13 @@ def formatted_name(name):
 
     if len(value) < 2:
         return name
-    
-    first_name = value[0]
-    rest = " ".join(value[1:])
-    formatted_name = f"{rest}, {first_name}"
+    last_name_index = -1
+
+    if value[-1].lower() == "jr" or value[-1].lower() == "jr.":
+        last_name_index=-2
+    last_name = value[last_name_index]
+    rest = " ".join(value[:last_name_index])
+    formatted_name = f"{last_name}, {rest}"
     return formatted_name
 
 
@@ -50,12 +54,16 @@ def generate_UI():
     reason_label = tk.Label(window, text="Reason:")
     reason_label.grid(row=1, column=0)
     reasons = [
+        "Assault",
         "Burglary",
         "Driving under the influence (DUI)",
         "Driving while intoxicated (DWI)",
         "Driving while suspended (DWS)",
+        "Domestic Abuse",
+        "Drug Possession",
         "Parole",
         "Probation",
+        "Sex Crimes",
         "Traffic Violation",
         "Other"
     ]
