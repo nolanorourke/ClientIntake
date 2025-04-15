@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from tkinter import messagebox, ttk
 import datetime
 from tkcalendar import DateEntry
@@ -9,6 +10,30 @@ def display_data(name, reason, date_ocurred, location_ocurred):
     print(f"Date Occurred: {date_ocurred}")
     print(f"Location: {location_ocurred}")
 
+def formatted_name(name):
+    value = name.strip().split()
+
+    if len(value) < 2:
+        return name
+    
+    first_name = value[0]
+    rest = " ".join(value[1:])
+    formatted_name = f"{rest}, {first_name}"
+    return formatted_name
+
+
+def create_folder(name):
+    folder_name = formatted_name(name)
+
+    base_path = os.path.join(os.getcwd(), "Potential Clients")
+    full_path = os.path.join(base_path, folder_name)
+
+    os.makedirs(base_path, exist_ok=True)
+    os.makedirs(full_path, exist_ok=True)
+
+    print(f"Folder create at: {full_path}")
+
+    return full_path
 
 def generate_UI():
     window = tk.Tk()
@@ -86,6 +111,8 @@ def generate_UI():
             location = "NO LOCATION"
 
         display_data(name, reason, date, location)
+        if name:
+            create_folder(name)
 
         name_entry.delete(0, tk.END)
         reasons_variable.set("Select a reason")
@@ -98,6 +125,8 @@ def generate_UI():
     submit_button.grid(row=4, column=0, columnspan=2)
 
     window.mainloop()
+
+
 
 if __name__ == "__main__":
     generate_UI()
