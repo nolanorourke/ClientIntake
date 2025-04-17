@@ -29,8 +29,8 @@ def formatted_name(name):
 def create_folder(name):
     folder_name = formatted_name(name)
 
-    base_path = os.path.join(os.getcwd(), "Potential Clients")
-    full_path = os.path.join(base_path, folder_name)
+    #base_path = os.path.join(os.getcwd(), "Potential Clients")
+    full_path = os.path.join("")
 
     os.makedirs(base_path, exist_ok=True)
     os.makedirs(full_path, exist_ok=True)
