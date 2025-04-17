@@ -31,13 +31,30 @@ def create_folder(name):
 
     base_path = os.path.join("\\\\192.168.3.251\\Shared\\Clients", "Potential Clients")
     full_path = os.path.join(base_path, folder_name)
-    
+
     os.makedirs(base_path, exist_ok=True)
     os.makedirs(full_path, exist_ok=True)
 
     print(f"Folder created at: {full_path}")
 
     return full_path
+
+def create_file(name, reason, date, location, folder_path):
+    doc = Document()
+    doc.add_heading(f'Client Info: {name}', level=1)
+
+    doc.add_paragraph(f"Name: {name}")
+    doc.add_paragraph(f"Reason for Calling: {reason}")
+    doc.add_paragraph(f"Date Ocurred: {date}")
+    doc.add_paragraph(f"Location Ocurred: {location}")
+    # doc.add_paragraph(f"{}")
+    # doc.add_paragraph(f"{}")
+    doc.add_paragraph(f"Date COntacted {datetime.datetime.now().strftime('%m-%d-%Y %H:%M')}")
+
+    file_path = os.path.join(folder_path, f"{name.replace(' ', '_')}_intake.docx")
+    doc.save(file_path)
+
+    print (f"Saved Word document at {file_path}")
 
 def generate_UI():
     window = tk.Tk()
@@ -120,7 +137,7 @@ def generate_UI():
 
         display_data(name, reason, date, location)
         if name:
-            create_folder(name)
+            create_file(name, reason, date, location, create_folder(name))
 
         name_entry.delete(0, tk.END)
         reasons_variable.set("Select a reason")
