@@ -29,13 +29,13 @@ def formatted_name(name):
 def create_folder(name):
     folder_name = formatted_name(name)
 
-    #base_path = os.path.join(os.getcwd(), "Potential Clients")
-    full_path = os.path.join("\\192.168.3.251\Shared\Clients\Potential Clients")
-
-    #os.makedirs(base_path, exist_ok=True)
+    base_path = os.path.join("\\\\192.168.3.251\\Shared\\Clients", "Potential Clients")
+    full_path = os.path.join(base_path, folder_name)
+    
+    os.makedirs(base_path, exist_ok=True)
     os.makedirs(full_path, exist_ok=True)
 
-    print(f"Folder create at: {full_path}")
+    print(f"Folder created at: {full_path}")
 
     return full_path
 
