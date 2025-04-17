@@ -49,7 +49,7 @@ def create_file(name, reason, date, location, folder_path):
     doc.add_paragraph(f"Location Ocurred: {location}")
     # doc.add_paragraph(f"{}")
     # doc.add_paragraph(f"{}")
-    doc.add_paragraph(f"Date COntacted {datetime.datetime.now().strftime('%m-%d-%Y %H:%M')}")
+    doc.add_paragraph(f"Date Contacted {datetime.datetime.now().strftime('%m-%d-%Y %H:%M')}")
 
     file_path = os.path.join(folder_path, f"{name.replace(' ', '_')}_intake.docx")
     doc.save(file_path)
@@ -90,24 +90,6 @@ def generate_UI():
     #reason_entry = tk.Entry(window) #used to be the way to type in an entry, the more control the better
     reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
     reason_entry.grid(row=1, column=1)
-
-    # if reasons_variable == "Burglary":
-            #ask burglary questions
-        # case "Driving under the influence (DUI)":
-        #     #ask dui questions
-        # case "Driving while intoxicated (DWI)":
-        #     #ask dwi questions
-        # case "Driving while suspended (DWS)":
-        #     # ask dws questions
-        # case "Parole":
-        #     #ask parole questions
-        # case "Probation":
-        #     #ask probation questions
-        # case "Traffic Violation":
-        #     #ask numerous questions 
-        # case "Other":
-        #     #ask questions
-
 
     date_occurred_label = tk.Label(window, text="Date Occurred:")
     date_occurred_label.grid(row=2, column=0)
