@@ -104,7 +104,7 @@ def generate_UI():
         if reasons_variable.get() =="Other":
             if not custom_reason_entry:
                 custom_reason_entry = tk.Entry(window)
-                custom_reason_entry.grid(row=1, column=2)
+                custom_reason_entry.grid(row=1, column=3)
                 custom_reason_entry.insert(0, "Enter Custom Reason")
             else:
                 if custom_reason_entry:
