@@ -59,6 +59,7 @@ def create_file(name, reason, date, location, folder_path):
 
 def generate_UI():
     window = tk.Tk()
+    custom_reason_entry = None
     window.title("Client Intake Form")    
     window_width = int(window.winfo_screenwidth() * .6)
     window_height = int(window.winfo_screenheight() * .6)
@@ -94,8 +95,7 @@ def generate_UI():
     reason_entry.grid(row=1, column=1)
 
     def reason_handler(event):
-        global custom_reason_entry
-        custom_reason_entry = None
+        nonlocal custom_reason_entry
 
         if reasons_variable.get().strip() =="Other":
             if not custom_reason_entry:
@@ -122,6 +122,7 @@ def generate_UI():
     location_entry.grid(row=3, column=1)
 
     def submit():
+        nonlocal custom_reason_entry
         name = name_entry.get().strip()
         reason = reasons_variable.get().strip()
         date = date_occurred_entry.get().strip()
