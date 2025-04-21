@@ -95,16 +95,17 @@ def generate_UI():
 
     def reason_handler(event):
         global custom_reason_entry
+        custom_reason_entry = None
 
         if reasons_variable.get().strip() =="Other":
-            if not custom_reason_entry[0]:
-                custom_reason_entry[0] = tk.Entry(window)
-                custom_reason_entry[0].grid(row=1, column=2, padx=5)
-                custom_reason_entry[0].insert(0, "Enter Custom Reason")
+            if not custom_reason_entry:
+                custom_reason_entry = tk.Entry(window)
+                custom_reason_entry.grid(row=1, column=2, padx=5)
+                custom_reason_entry.insert(0, "Enter Custom Reason")
             else:
-                if custom_reason_entry[0]:
-                    custom_reason_entry[0].destroy()
-                    custom_reason_entry[0] = None
+                if custom_reason_entry:
+                    custom_reason_entry.destroy()
+                    custom_reason_entry = None
 
     reason_entry.bind("<<ComboboxSelected>>", reason_handler)
 
