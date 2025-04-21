@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
-from tkinter import messagebox, ttk
+from tkinter import messagebox
+from tkinter import ttk
 import datetime
 from tkcalendar import DateEntry
 from docx import Document 
@@ -91,11 +92,24 @@ def generate_UI():
         otherEntry.grid(row=1, column=2)
 
     #reason_entry = tk.Entry(window) #used to be the way to type in an entry, the more control the better
-    reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
+    #reason_entry = tk.OptionMenu(window, reasons_variable, *reasons) #used as a dropdown menu
+    reason_entry = ttk.Combobox(window, textvariable=reasons_variable, values=reasons, state = "readonly")
     reason_entry.grid(row=1, column=1)
+    reason_entry.bind("<<CombobocSelected>>", lambda event: reason_handler(reasons_variable.get()))
 
+    custom_reason_entry = None
     def reason_handler(reason):
-        reason = 
+        global custom_reason_entry
+
+        if reasons_variable.get() =="Other":
+            if not custom_reason_entry:
+                custom_reason_entry = tk.Entry(window)
+                custom_reason_entry.grid(row=1, column=2)
+                custom_reason_entry.insert(0, "Enter Custom Reason")
+            else:
+                if custom_reason_entry:
+                    custom_reason_entry.destroy()
+                    custom_reason_entry = None
 
 
 
@@ -118,8 +132,10 @@ def generate_UI():
 
         if not name:
             name = "NO NAME"
-        if reason == "Select a reason":
-            reason = "NO REASON"
+        if reason == "Other" and custom_reason_entry:
+            reason = custom_reason_entry.get().strip()
+            if not reason:
+                reason = "Not specified"
         if not date:
             date = "NO DATE"
         if not location:
