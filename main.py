@@ -87,30 +87,26 @@ def generate_UI():
     ]
     reasons_variable = tk.StringVar()
     reasons_variable.set("Select a reason")
-    if reasons_variable.get().strip() == "Other":
-        otherEntry = tk.Entry(window)
-        otherEntry.grid(row=1, column=2)
 
     #reason_entry = tk.Entry(window) #used to be the way to type in an entry, the more control the better
     #reason_entry = tk.OptionMenu(window, reasons_variable, *reasons) #used as a dropdown menu
     reason_entry = ttk.Combobox(window, textvariable=reasons_variable, values=reasons, state = "readonly")
     reason_entry.grid(row=1, column=1)
-    reason_entry.bind("<<CombobocSelected>>", lambda event: reason_handler(reasons_variable.get()))
 
-    custom_reason_entry = None
-    def reason_handler(reason):
+    def reason_handler(event):
         global custom_reason_entry
 
-        if reasons_variable.get() =="Other":
-            if not custom_reason_entry:
-                custom_reason_entry = tk.Entry(window)
-                custom_reason_entry.grid(row=1, column=3)
-                custom_reason_entry.insert(0, "Enter Custom Reason")
+        if reasons_variable.get().strip() =="Other":
+            if not custom_reason_entry[0]:
+                custom_reason_entry[0] = tk.Entry(window)
+                custom_reason_entry[0].grid(row=1, column=2, padx=5)
+                custom_reason_entry[0].insert(0, "Enter Custom Reason")
             else:
-                if custom_reason_entry:
-                    custom_reason_entry.destroy()
-                    custom_reason_entry = None
+                if custom_reason_entry[0]:
+                    custom_reason_entry[0].destroy()
+                    custom_reason_entry[0] = None
 
+    reason_entry.bind("<<ComboboxSelected>>", reason_handler)
 
 
     date_occurred_label = tk.Label(window, text="Date Occurred:")
@@ -149,6 +145,10 @@ def generate_UI():
         reasons_variable.set("Select a reason")
         date_occurred_entry.delete(0, tk.END)
         location_entry.delete(0, tk.END)
+
+        if custom_reason_entry:
+            custom_reason_entry[0].destroy()
+            custom_reason_entry[0] = None
 
         messagebox.showinfo("Success!", "Data submitted successfully")
     
