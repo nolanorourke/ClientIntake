@@ -86,10 +86,18 @@ def generate_UI():
     ]
     reasons_variable = tk.StringVar()
     reasons_variable.set("Select a reason")
+    if reasons_variable.get().strip() == "Other":
+        otherEntry = tk.Entry(window)
+        otherEntry.grid(row=1, column=2)
 
     #reason_entry = tk.Entry(window) #used to be the way to type in an entry, the more control the better
     reason_entry = tk.OptionMenu(window, reasons_variable, *reasons)
     reason_entry.grid(row=1, column=1)
+
+    def reason_handler(reason):
+        reason = 
+
+
 
     date_occurred_label = tk.Label(window, text="Date Occurred:")
     date_occurred_label.grid(row=2, column=0)
