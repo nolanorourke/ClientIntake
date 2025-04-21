@@ -148,8 +148,8 @@ def generate_UI():
         location_entry.delete(0, tk.END)
 
         if custom_reason_entry:
-            custom_reason_entry[0].destroy()
-            custom_reason_entry[0] = None
+            custom_reason_entry.destroy()
+            custom_reason_entry = None
 
         messagebox.showinfo("Success!", "Data submitted successfully")
     
